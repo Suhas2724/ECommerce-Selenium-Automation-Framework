@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.seleniumFramework.pojo.TestData;
 import org.seleniumFramework.pojo.User;
 import org.seleniumFramework.utils.CSVReaderUtility;
+import org.seleniumFramework.utils.ExcelReaderUtility;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -28,7 +29,12 @@ public class LoginDataProvider {
     }
 
     @DataProvider(name = "LoginTestCSVDataProvider")
-    public Iterator<User> loginCSVDataProvider(){
+    public Iterator<User> loginCSVDataProvider() {
         return CSVReaderUtility.readCSVFile("loginData.csv");
+    }
+
+    @DataProvider(name = "LoginTestExcelDataProvider")
+    public Iterator<User> loginExcelDataProvider() {
+        return ExcelReaderUtility.readExcelFile("loginData");
     }
 }

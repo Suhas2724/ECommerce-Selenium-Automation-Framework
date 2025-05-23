@@ -40,3 +40,5 @@ build/
 /src/test/java/org/seleniumFramework/initialScripts/
 /test-output/
 /.idea/
+/logs/
+/reports/

@@ -1,32 +1,29 @@
 package org.seleniumFramework.tests;
 
-import static org.seleniumFramework.constants.Browser.*;
-
+import org.apache.logging.log4j.Logger;
+import org.seleniumFramework.listeners.RetryAnalyzer;
+import org.seleniumFramework.listeners.TestListener;
 import org.seleniumFramework.pages.HomePage;
-
-import static org.testng.Assert.*;
-
 import org.seleniumFramework.pojo.User;
+import org.seleniumFramework.utils.LoggerUtility;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static org.seleniumFramework.constants.Browser.CHROME;
+import static org.testng.Assert.assertEquals;
 
-public class LoginTest {
+@Listeners(TestListener.class)
+public class LoginTest extends BaseTest{
 
-    HomePage homePage;
 
-    @BeforeMethod(description = "Load the homepage of the website")
-    public void setUp() {
-        homePage = new HomePage(CHROME);
-    }
 
-    @AfterMethod(description = "Closing the browser after test")
-    public void tearDown() {
-        homePage.quitDriver();
-    }
 
-    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestDataProvider")
+
+
+    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestDataProvider", retryAnalyzer = RetryAnalyzer.class)
     public void loginTest(User user) {
         assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUserName(), "Test Account");
     }
@@ -36,8 +33,13 @@ public class LoginTest {
         assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUserName(), "Test Account");
     }
 
-    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestCSVDataProvider")
+    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestCSVDataProvider" )
     public void loginTestWithInvalidCredentials(User user) {
         assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getErrorMessage(), "Authentication failed.");
+    }
+
+    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestExcelDataProvider")
+    public void loginExcelTest(User user) {
+        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUserName(), "Test Account");
     }
 }

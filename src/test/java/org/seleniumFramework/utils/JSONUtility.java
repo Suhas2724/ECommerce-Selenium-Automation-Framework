@@ -10,7 +10,7 @@ import java.io.FileReader;
 
 public class JSONUtility {
 
-    public static String readJSON(Environment env) {
+    public static org.seleniumFramework.pojo.Environment readJSON(Environment env) {
 
         Gson gson = new Gson();
         File jsonFile = new File(System.getProperty("user.dir") + "/src/test/java/org/seleniumFramework/config/config.json");
@@ -22,7 +22,7 @@ public class JSONUtility {
         }
         Config config = gson.fromJson(fileReader, Config.class);
         org.seleniumFramework.pojo.Environment environment = config.getEnvironments().get(env.toString().toUpperCase());
-        return environment.getUrl();
+        return environment;
 
     }
 
