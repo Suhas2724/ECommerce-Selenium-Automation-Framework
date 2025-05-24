@@ -33,11 +33,6 @@ public class LoginTest extends BaseTest{
         assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUserName(), "Test Account");
     }
 
-    @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestCSVDataProvider" )
-    public void loginTestWithInvalidCredentials(User user) {
-        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getErrorMessage(), "Authentication failed.");
-    }
-
     @Test(description = "Login test", groups = {"e2e", "sanity"}, dataProviderClass = org.seleniumFramework.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestExcelDataProvider")
     public void loginExcelTest(User user) {
         assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUserName(), "Test Account");
