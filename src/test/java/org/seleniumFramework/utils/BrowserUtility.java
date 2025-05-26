@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,6 +32,31 @@ public class BrowserUtility {
         if (browserName == Browser.CHROME) {
             driver.set(new ChromeDriver());
             maximizeWindow();
+        } else if (browserName == Browser.SAFARI) {
+            driver.set(new SafariDriver());
+            maximizeWindow();
+        } else if (browserName == Browser.FIREFOX) {
+            driver.set(new FirefoxDriver());
+            maximizeWindow();
+        } else {
+            logger.info("Invalid browser name ... Please select Chrome or Safari or Firefox");
+        }
+    }
+
+    public BrowserUtility(Browser browserName, boolean isHeadless) {
+        logger.info("Initializing the browser: " + browserName);
+        if (browserName == Browser.CHROME) {
+            if (isHeadless) {
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                options.addArguments("--window-size=1920,1080");
+//                options.addArguments("disable-gpu");
+                driver.set(new ChromeDriver(options));
+                maximizeWindow();
+            } else {
+                driver.set(new ChromeDriver());
+                maximizeWindow();
+            }
         } else if (browserName == Browser.SAFARI) {
             driver.set(new SafariDriver());
             maximizeWindow();

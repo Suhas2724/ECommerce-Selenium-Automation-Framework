@@ -17,7 +17,7 @@ public class BaseTest {
     @BeforeMethod(description = "Load the homepage of the website")
     public void setUp() {
         logger.info("Loading the homepage of the website");
-        homePage = new HomePage(CHROME);
+        homePage = new HomePage(CHROME, true); // Initialize the HomePage with Chrome browser in non-headless mode
     }
 
     @AfterMethod(description = "Closing the browser after test")
