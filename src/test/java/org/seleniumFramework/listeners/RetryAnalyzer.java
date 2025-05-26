@@ -9,16 +9,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
 
-    // Track retry count per test method
-    private static final ConcurrentHashMap<String, Integer> retryCounts = new ConcurrentHashMap<>();
-    private static final int MAX_RETRY_COUNT = Integer.parseInt(PropertiesUtility.readProperty(Environment.QA,"MAX_RETRY_COUNT"));
+    private int retryCount = 0;
+    private static final int MAX_RETRY_COUNT = 2; // Change this to desired number of retries
 
     @Override
     public boolean retry(ITestResult result) {
-        String key = result.getMethod().getQualifiedName();
-        int currentCount = retryCounts.getOrDefault(key, 0);
-        if (currentCount < MAX_RETRY_COUNT) {
-            retryCounts.put(key, currentCount + 1);
+        if (retryCount < MAX_RETRY_COUNT) {
+            retryCount++;
             return true;
         }
         return false;
