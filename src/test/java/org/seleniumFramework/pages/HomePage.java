@@ -2,6 +2,7 @@ package org.seleniumFramework.pages;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.seleniumFramework.constants.Browser;
 
 import static org.seleniumFramework.constants.Environment.*;
@@ -18,6 +19,11 @@ public final class HomePage extends BrowserUtility {
     public HomePage(Browser browserName,boolean isHeadless) {
         super(browserName,isHeadless);//call the parent class
         goToWebsite(JSONUtility.readJSON(DEV).getUrl());
+    }
+
+    public HomePage(WebDriver driver){
+        super(driver);
+        goToWebsite(JSONUtility.readJSON(QA).getUrl());
     }
 
     public LoginPage goToLoginPage() { //page functions -> cant be void return type
