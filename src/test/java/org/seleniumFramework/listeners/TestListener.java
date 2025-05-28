@@ -65,7 +65,7 @@ public class TestListener implements ITestListener {
 
     public void onStart(ITestContext context) {
         logger.info("Test suite started");
-        ExtentReporterUtility.setUpSparkReporter("reports");
+        ExtentReporterUtility.setUpSparkReporter("report");
     }
 
     public void onFinish(ITestContext context) {

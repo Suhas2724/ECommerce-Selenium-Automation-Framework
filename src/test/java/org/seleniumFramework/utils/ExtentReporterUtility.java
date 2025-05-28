@@ -9,22 +9,22 @@ public class ExtentReporterUtility {
     private static ExtentReports extentReports;
     private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
 
-    public static void setUpSparkReporter(String reportName){
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/"+reportName+".html");
+    public static void setUpSparkReporter(String reportName) {
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/" + reportName + ".html");
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
     }
 
-    public static void createExtentTest(String testName){
+    public static void createExtentTest(String testName) {
         ExtentTest test = extentReports.createTest(testName);
         extentTest.set(test);
     }
 
-    public static ExtentTest getExtentTest(){
+    public static ExtentTest getExtentTest() {
         return extentTest.get();
     }
 
-    public static void flushExtentReports(){
+    public static void flushExtentReports() {
         extentReports.flush();
     }
 

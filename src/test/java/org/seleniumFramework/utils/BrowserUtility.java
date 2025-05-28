@@ -121,11 +121,10 @@ public class BrowserUtility {
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) getDriver();
         File source = ts.getScreenshotAs(OutputType.FILE);
-        String relativePath = "screenshots/" + screenshotName + "_" + dateName + ".png";
-        String destination = System.getProperty("user.dir") + "/reports/" + relativePath;
-        File finalDestination = new File(destination);
+        String relativePath = "./screenshots/" + screenshotName + "_" + dateName + ".png";
+        File screenShotFile = new File(relativePath);
         try {
-            FileUtils.copyFile(source, finalDestination);
+            FileUtils.copyFile(source, screenShotFile);
         } catch (IOException e) {
             logger.error("Failed to save screenshot: " + e.getMessage());
         }
