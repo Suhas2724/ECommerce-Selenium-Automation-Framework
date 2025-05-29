@@ -3,7 +3,7 @@ package org.seleniumFramework.tests;
 import org.seleniumFramework.pages.HomePage;
 import org.testng.annotations.Test;
 
-import static org.seleniumFramework.constants.Browser.*;
+import static org.seleniumFramework.constants.Browser.CHROME;
 
 public class SignUpTest {
 
