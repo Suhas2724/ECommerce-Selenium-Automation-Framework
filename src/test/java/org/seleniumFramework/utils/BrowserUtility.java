@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 
 public class BrowserUtility {
 
@@ -129,6 +130,11 @@ public class BrowserUtility {
             logger.error("Failed to save screenshot: " + e.getMessage());
         }
         return relativePath;
+    }
+
+    public List<WebElement> getAllElements(By locator){
+        List<WebElement> elements = driver.get().findElements(locator);
+        return elements;
     }
 
 }
